@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal News Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="ticker-container" onclick="openPopup('forex')" style="cursor:pointer">
+        <div class="ticker-label">FOREX</div>
+        <div class="ticker-wrap"><div id="forex-row" class="ticker-move">Connecting to live exchange rates...</div></div>
+    </div>
+
+    <div class="ticker-container" onclick="openPopup('metals')" style="cursor:pointer">
+        <div class="ticker-label">METALS</div>
+        <div class="ticker-wrap"><div id="metal-row" class="ticker-move">Fetching Nepal Gold & Silver prices...</div></div>
+    </div>
+
+    <header class="main-header" style="background: white; border-bottom: 1px solid #eee; padding: 20px 0;">
+        <div class="container" style="text-align: center;">
+            <h1 style="color: #DC143C; font-size: 2.5rem; font-family: 'Inter', sans-serif;">Nepal News Hub 🇳🇵</h1>
+            <p style="color: #666;">Your Daily Automated News Aggregator</p>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 1200px; margin: 30px auto; padding: 0 20px;">
+        <div id="newsGrid" class="news-grid">
+            <div style="text-align:center; padding: 50px;">
+                <i class="fas fa-circle-notch fa-spin" style="font-size: 2rem; color: #DC143C;"></i>
+                <p>Gathering latest news...</p>
+            </div>
+        </div>
+    </main>
+
+    <div id="data-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2 id="modal-title">Market Details</h2>
+            <hr style="margin: 15px 0; opacity: 0.2;">
+            <div id="modal-table-container"></div>
+        </div>
+    </div>
+
+    <footer style="background: #1f2937; color: white; padding: 50px 0; margin-top: 60px; text-align: center;">
+        <div class="container">
+            <p style="font-weight: bold; margin-bottom: 10px;">Nepal News Hub</p>
+            <div style="margin-bottom: 20px;">
+                <a href="admin.html" style="color: #aaa; margin: 0 10px; text-decoration: none;">Admin</a>
+                <a href="about.html" style="color: #aaa; margin: 0 10px; text-decoration: none;">About</a>
+                <a href="contact.html" style="color: #aaa; margin: 0 10px; text-decoration: none;">Contact</a>
+            </div>
+            <p style="font-size: 0.8rem; color: #888;">&copy; 2026 Nepal News Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
