@@ -3,60 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nepal News Hub</title>
+
+    <!-- ── SEO ───────────────────────────────────────────────── -->
+    <title>Nepal News Hub – Latest News from Nepal in English & Nepali</title>
+    <meta name="description" content="Nepal News Hub aggregates the latest breaking news from 21+ trusted Nepali news sources in one place. Read politics, business, sports, tech and health news in English and Nepali.">
+    <meta name="keywords" content="Nepal news, Nepali news, Nepal breaking news, Nepal samachar, online khabar, Himalayan Times, BBC Nepali, Nepal politics, Nepal business">
+    <meta name="author" content="Nepal News Hub">
+    <link rel="canonical" href="https://nepalnewshub.pages.dev/">
+
+    <!-- ── Open Graph (Facebook / WhatsApp preview) ──────────── -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nepalnewshub.pages.dev/">
+    <meta property="og:title" content="Nepal News Hub – Latest News from Nepal">
+    <meta property="og:description" content="Fast, reliable, bilingual news aggregator for Nepal. 21+ trusted sources in one place.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80">
+
+    <!-- ── Twitter Card ───────────────────────────────────────── -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nepal News Hub – Latest News from Nepal">
+    <meta name="twitter:description" content="Fast, reliable, bilingual news aggregator for Nepal.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80">
+
+    <!-- ── Structured Data (helps Google show your site nicely) ── -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsMediaOrganization",
+        "name": "Nepal News Hub",
+        "url": "https://nepalnewshub.pages.dev/",
+        "description": "Bilingual news aggregator covering Nepal from 21+ trusted sources",
+        "areaServed": "NP",
+        "inLanguage": ["en", "ne"]
+    }
+    </script>
+
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3036335622208432" crossorigin="anonymous"></script>
 </head>
 <body>
-
-    <div class="ticker-container" onclick="openPopup('forex')" style="cursor:pointer">
-        <div class="ticker-label">FOREX</div>
-        <div class="ticker-wrap"><div id="forex-row" class="ticker-move">Connecting to live exchange rates...</div></div>
-    </div>
-
-    <div class="ticker-container" onclick="openPopup('metals')" style="cursor:pointer">
-        <div class="ticker-label">METALS</div>
-        <div class="ticker-wrap"><div id="metal-row" class="ticker-move">Fetching Nepal Gold & Silver prices...</div></div>
-    </div>
-
-    <header class="main-header" style="background: white; border-bottom: 1px solid #eee; padding: 20px 0;">
-        <div class="container" style="text-align: center;">
-            <h1 style="color: #DC143C; font-size: 2.5rem; font-family: 'Inter', sans-serif;">Nepal News Hub 🇳🇵</h1>
-            <p style="color: #666;">Your Daily Automated News Aggregator</p>
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo-area">
+                <h1>Nepal <span class="highlight">News Hub</span></h1>
+                <p class="tagline">Fast • Reliable • Free</p>
+            </div>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search news..." aria-label="Search news">
+                    <button onclick="performSearch()" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="controls-group">
+                    <select id="langSwitcher" class="lang-select" onchange="changeLanguage(this.value)" aria-label="Language">
+                        <option value="en">English</option>
+                        <option value="np">नेपाली</option>
+                    </select>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="dataSaverToggle" aria-label="Data saver mode">
+                        <span class="slider"></span>
+                        <span class="label-text">Data</span>
+                    </label>
+                    <button class="icon-btn" onclick="showBookmarks()" aria-label="Bookmarks"><i class="fas fa-bookmark"></i></button>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="container" style="max-width: 1200px; margin: 30px auto; padding: 0 20px;">
-        <div id="newsGrid" class="news-grid">
-            <div style="text-align:center; padding: 50px;">
-                <i class="fas fa-circle-notch fa-spin" style="font-size: 2rem; color: #DC143C;"></i>
-                <p>Gathering latest news...</p>
-            </div>
-        </div>
-    </main>
-
-    <div id="data-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closePopup()">&times;</span>
-            <h2 id="modal-title">Market Details</h2>
-            <hr style="margin: 15px 0; opacity: 0.2;">
-            <div id="modal-table-container"></div>
+    <div class="ticker-wrap">
+        <div class="container ticker-container">
+            <span class="ticker-label">BREAKING:</span>
+            <div class="ticker-move" id="tickerContent">Loading...</div>
         </div>
     </div>
 
-    <footer style="background: #1f2937; color: white; padding: 50px 0; margin-top: 60px; text-align: center;">
-        <div class="container">
-            <p style="font-weight: bold; margin-bottom: 10px;">Nepal News Hub</p>
-            <div style="margin-bottom: 20px;">
-                <a href="admin.html" style="color: #aaa; margin: 0 10px; text-decoration: none;">Admin</a>
-                <a href="about.html" style="color: #aaa; margin: 0 10px; text-decoration: none;">About</a>
-                <a href="contact.html" style="color: #aaa; margin: 0 10px; text-decoration: none;">Contact</a>
+    <main class="container">
+        <div class="controls-bar">
+            <div class="filters-scroll">
+                <button class="filter-btn active" onclick="filterNews('all')">All</button>
+                <button class="filter-btn" onclick="filterNews('politics')">Politics</button>
+                <button class="filter-btn" onclick="filterNews('business')">Business</button>
+                <button class="filter-btn" onclick="filterNews('sports')">Sports</button>
+                <button class="filter-btn" onclick="filterNews('tech')">Tech</button>
+                <button class="filter-btn" onclick="filterNews('health')">Health</button>
             </div>
-            <p style="font-size: 0.8rem; color: #888;">&copy; 2026 Nepal News Hub. All rights reserved.</p>
+            <div class="sort-dropdown">
+                <label for="sortSelect">Sort:</label>
+                <select id="sortSelect" aria-label="Sort news">
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="trending">Trending</option>
+                    <option value="source">Source</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="topBannerContainer" class="banner-container"></div>
+
+        <div id="newsGrid" class="news-grid">
+            <div class="loading-state">
+                <i class="fas fa-circle-notch fa-spin"></i>
+                <span>Loading news...</span>
+            </div>
+        </div>
+
+        <div id="emptyState" class="empty-state" style="display:none;">
+            <i class="fas fa-search"></i>
+            <h3>No news found</h3>
+            <p>Try different keywords</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h4>Nepal News Hub</h4>
+                    <p>Your trusted news source</p>
+                </div>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="about.html">About Us</a>
+                </div>
+            </div>
+            <div class="copyright">© 2026 Nepal News Hub 🇳🇵</div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="Script.js"></script>
 </body>
 </html>
