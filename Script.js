@@ -288,10 +288,10 @@ function renderNews(newsList) {
     grid.innerHTML = '';
 
     const adSlotIds = [
-        'YOUR_IN_FEED_AD_SLOT_ID_1',
-        'YOUR_IN_FEED_AD_SLOT_ID_2',
-        'YOUR_IN_FEED_AD_SLOT_ID_3',
-        'YOUR_IN_FEED_AD_SLOT_ID_4'
+        '2473977480',
+        '2473977480',
+        '2473977480',
+        '2473977480'
     ];
     let adIndex = 0;
     let newsCount = 0;
