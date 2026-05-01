@@ -238,7 +238,7 @@ input:checked + .slider:before { transform: translateX(16px); }
 }
 
 /* =========================================
-   3. TICKER
+   3. TICKER & MARKET BAR
    ========================================= */
 .ticker-wrap {
     background: linear-gradient(90deg, var(--primary), var(--primary-dark));
@@ -284,6 +284,109 @@ input:checked + .slider:before { transform: translateX(16px); }
 @keyframes scroll {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
+}
+
+/* Market Rates Bar */
+.market-bar {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 12px 0;
+    border-bottom: 2px solid var(--primary);
+}
+
+.market-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+    padding: 0 10px;
+}
+
+.market-container::-webkit-scrollbar { height: 4px; }
+.market-container::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+.market-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.market-item:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+}
+
+.market-icon {
+    font-size: 1.4rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.market-icon.gold {
+    background: linear-gradient(135deg, #ffd700, #ffb347);
+    color: #7a5200;
+}
+
+.market-icon.silver {
+    background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+    color: #555;
+}
+
+.market-icon.forex {
+    background: linear-gradient(135deg, var(--success), #34d399);
+    color: white;
+}
+
+.market-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 80px;
+}
+
+.market-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.market-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.market-divider {
+    width: 1px;
+    height: 30px;
+    background: rgba(255,255,255,0.2);
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .market-item { padding: 6px 10px; }
+    .market-icon { font-size: 1.1rem; width: 30px; height: 30px; }
+    .market-info { min-width: 60px; }
+    .market-value { font-size: 0.8rem; }
+    .market-divider { display: none; }
+}
+
+@media (max-width: 480px) {
+    .market-container { justify-content: flex-start; gap: 8px; }
+    .market-bar { padding: 8px 0; }
 }
 
 /* =========================================
@@ -812,7 +915,132 @@ footer {
 .footer-brand p { font-size: 0.85rem; line-height: 1.5; }
 .footer-links a { margin-left: 18px; font-size: 0.85rem; transition: var(--transition); }
 .footer-links a:hover { color: white; padding-left: 4px; }
-.copyright { text-align: center; font-size: 0.8rem; color: #6b7280; }
+/* Support Us Section */
+.support-us {
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, rgba(220, 20, 60, 0.05), rgba(16, 185, 129, 0.05));
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.support-us h3 {
+    font-size: 1.4rem;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.support-us p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    max-width: 500px;
+    margin: 0 auto 20px;
+}
+
+.support-options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.support-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.support-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.support-btn img {
+    height: 24px;
+    width: auto;
+}
+
+.support-btn.esewa {
+    background: linear-gradient(135deg, #008000, #00a000);
+    color: white;
+}
+
+.support-btn.esewa:hover {
+    background: linear-gradient(135deg, #009000, #00b000);
+    border-color: #008000;
+}
+
+.support-btn.khalti {
+    background: linear-gradient(135deg, #5c21d4, #7c3aed);
+    color: white;
+}
+
+.support-btn.khalti:hover {
+    background: linear-gradient(135deg, #6c31e4, #8c4afd);
+    border-color: #5c21d4;
+}
+
+.support-btn.paypal {
+    background: linear-gradient(135deg, #003087, #009cde);
+    color: white;
+}
+
+.support-btn.paypal:hover {
+    background: linear-gradient(135deg, #004097, #00acdf);
+    border-color: #003087;
+}
+
+/* Footer Ads */
+.footer-ads {
+    margin: 20px 0 30px;
+    padding: 15px;
+    background: var(--light);
+    border-radius: 10px;
+    min-height: 100px;
+}
+
+/* Ad Card (in-grid ads) */
+.ad-card {
+    background: var(--white);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.ad-card::before {
+    content: 'Advertisement';
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-size: 0.6rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ad-card .adsbygoogle {
+    width: 100%;
+    min-height: 250px;
+}
+
+@media (max-width: 640px) {
+    .support-us { padding: 20px 15px; }
+    .support-us h3 { font-size: 1.2rem; }
+    .support-btn { padding: 10px 18px; font-size: 0.85rem; }
+}
 
 .share-modal-overlay {
     position: fixed;
