@@ -618,6 +618,7 @@
         <input type="text" id="adminGold" placeholder="Gold Price (e.g., Rs. 1,45,000)">
         <input type="text" id="adminSilver" placeholder="Silver Price (e.g., Rs. 1,750)">
         <input type="text" id="adminForex" placeholder="USD Rate (e.g., 134.50)">
+        <input type="text" id="adminEuro" placeholder="EUR Rate (e.g., 145.20)">
         <button onclick="updateMarket()" style="background: #10b981; color: white; border: none; padding: 10px; cursor: pointer;">Update Market Bar</button>
     </div>
 </div>
@@ -627,8 +628,9 @@ function updateMarket() {
     const gold = document.getElementById('adminGold').value;
     const silver = document.getElementById('adminSilver').value;
     const forex = document.getElementById('adminForex').value;
+    const euro = document.getElementById('adminEuro').value;
     
-    const marketData = { gold, silver, forex };
+    const marketData = { gold, silver, forex, euro };
     localStorage.setItem('marketRates', JSON.stringify(marketData));
     alert('Market rates updated! Refresh the homepage to see.');
 }

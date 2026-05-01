@@ -1,3 +1,21 @@
+// ── State ──────────────────────────────────────────────────────────────────────
+let marketRates = {
+    gold: null,
+    silver: null,
+    forex: null,
+    euro: null
+};
+
+let allNews = [];
+let bookmarks = JSON.parse(localStorage.getItem('nepalNewsBookmarks')) || [];
+let userReactions = JSON.parse(localStorage.getItem('nepalNewsReactions')) || {};
+let manualStories = JSON.parse(localStorage.getItem('manualStories')) || [];
+let siteBanner = JSON.parse(localStorage.getItem('siteBanner')) || {};
+let CONFIG_LANG = localStorage.getItem('siteLanguage') || 'en';
+let siteSources = JSON.parse(localStorage.getItem('newsSources'));
+let currentSort = 'newest';
+let trendingNews = [];
+
 const DEFAULT_SOURCES = [
     { id: 1, name: "The Himalayan Times", url: "https://thehimalayantimes.com/feed/", category: "english", active: true },
     { id: 2, name: "Nepali Times", url: "https://www.nepalitimes.com/feed/", category: "english", active: true },
@@ -22,17 +40,6 @@ const DEFAULT_SOURCES = [
     { id: 21, name: "BBC Nepali", url: "https://www.bbc.com/nepali/index.xml", category: "intl", active: true }
 ];
 
-// ── State ──────────────────────────────────────────────────────────────────────
-let allNews = [];
-let bookmarks = JSON.parse(localStorage.getItem('nepalNewsBookmarks')) || [];
-let userReactions = JSON.parse(localStorage.getItem('nepalNewsReactions')) || {};
-let manualStories = JSON.parse(localStorage.getItem('manualStories')) || [];
-let siteBanner = JSON.parse(localStorage.getItem('siteBanner')) || {};
-let CONFIG_LANG = localStorage.getItem('siteLanguage') || 'en';
-let siteSources = JSON.parse(localStorage.getItem('newsSources'));
-let currentSort = 'newest';
-let trendingNews = [];
-
 const CACHE_KEY = 'nepalNewsCache';
 const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
 
@@ -52,11 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(CONFIG_LANG);
     renderBanner();
     updateBookmarkCount();
+    fetchMarketRates(); // Load market rates
     if (localStorage.getItem('dataSaver') === 'true') {
         document.getElementById('dataSaverToggle').checked = true;
         document.body.classList.add('data-saver-on');
     }
     document.getElementById('langSwitcher').value = CONFIG_LANG;
+
+    // Initialize footer AdSense
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {}
 
     // Show cached news instantly, then refresh in background
     const cached = loadFromCache();
@@ -274,6 +287,15 @@ function renderNews(newsList) {
     emptyState.style.display = 'none';
     grid.innerHTML = '';
 
+    const adSlotIds = [
+        'YOUR_IN_FEED_AD_SLOT_ID_1',
+        'YOUR_IN_FEED_AD_SLOT_ID_2',
+        'YOUR_IN_FEED_AD_SLOT_ID_3',
+        'YOUR_IN_FEED_AD_SLOT_ID_4'
+    ];
+    let adIndex = 0;
+    let newsCount = 0;
+
     newsList.forEach((news, index) => {
         const isBookmarked = bookmarks.includes(news.id);
         const userVote = userReactions[news.id];
@@ -305,6 +327,17 @@ function renderNews(newsList) {
             </div>
         `;
         grid.appendChild(card);
+
+        newsCount++;
+        if (newsCount % 6 === 0 && adIndex < adSlotIds.length) {
+            const adCard = createAdCard(adSlotIds[adIndex]);
+            adIndex++;
+            grid.appendChild(adCard);
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {}
+        }
+
         setTimeout(() => {
             card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
             card.style.opacity = '1';
@@ -452,6 +485,78 @@ function openShareModal(url, title) {
     modal.innerHTML = `<div class="share-modal"><div class="share-header"><h3>Share</h3><button onclick="this.closest('.share-modal-overlay').remove()">&times;</button></div><div class="share-options"><button class="share-option" onclick="navigator.clipboard.writeText('${url}').then(() => alert('Copied!'))"><i class="fas fa-link"></i> Copy Link</button><button class="share-option" onclick="window.open('https://wa.me/?text=${encodedTitle}', '_blank')"><i class="fab fa-whatsapp"></i> WhatsApp</button><button class="share-option" onclick="window.open('https://facebook.com/sharer/sharer.php?u=${encodedUrl}', '_blank')"><i class="fab fa-facebook-f"></i> Facebook</button></div></div>`;
     document.body.appendChild(modal);
     modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+}
+
+// ── Market Rates ───────────────────────────────────────────────────────────────
+async function fetchMarketRates() {
+    const adminRates = JSON.parse(localStorage.getItem('marketRates'));
+    if (adminRates && (adminRates.gold || adminRates.silver || adminRates.forex)) {
+        if (adminRates.gold) document.getElementById('goldValue').textContent = adminRates.gold;
+        if (adminRates.silver) document.getElementById('silverValue').textContent = adminRates.silver;
+        if (adminRates.forex) document.getElementById('forexValue').textContent = 'Rs. ' + adminRates.forex;
+        if (adminRates.euro) document.getElementById('euroValue').textContent = 'Rs. ' + adminRates.euro;
+        return;
+    }
+
+    try {
+        const forexCache = localStorage.getItem('forexCache');
+        const cacheTime = localStorage.getItem('forexCacheTime');
+        const now = Date.now();
+
+        let forexRates = null;
+        if (forexCache && cacheTime && (now - parseInt(cacheTime)) < 30 * 60 * 1000) {
+            forexRates = JSON.parse(forexCache);
+        } else {
+            const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+            if (response.ok) {
+                const data = await response.json();
+                forexRates = data.rates;
+                localStorage.setItem('forexCache', JSON.stringify(forexRates));
+                localStorage.setItem('forexCacheTime', now.toString());
+            }
+        }
+
+        if (forexRates) {
+            if (forexRates.NPR) {
+                document.getElementById('forexValue').textContent = 'Rs. ' + forexRates.NPR.toFixed(2);
+            }
+            if (forexRates.EUR && forexRates.NPR) {
+                const euroRate = forexRates.NPR / forexRates.EUR;
+                document.getElementById('euroValue').textContent = 'Rs. ' + euroRate.toFixed(2);
+            }
+        }
+
+        const goldValue = document.getElementById('goldValue');
+        if (goldValue.textContent === 'Loading...') {
+            goldValue.textContent = 'N/A';
+        }
+        const silverValue = document.getElementById('silverValue');
+        if (silverValue.textContent === 'Loading...') {
+            silverValue.textContent = 'N/A';
+        }
+    } catch (error) {
+        console.log('Market rates fetch error:', error);
+        document.getElementById('forexValue').textContent = 'N/A';
+        document.getElementById('euroValue').textContent = 'N/A';
+    }
+}
+
+// ── Ad Card Generator ─────────────────────────────────────────────────────────
+function createAdCard(slotId) {
+    const adCard = document.createElement('div');
+    adCard.className = 'ad-card';
+    adCard.innerHTML = `
+        <ins class="adsbygoogle"
+             style="display:block; width:100%; height:250px;"
+             data-ad-client="ca-pub-3036335622208432"
+             data-ad-slot="${slotId}"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    `;
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {}
+    return adCard;
 }
 
 // ── Exports ────────────────────────────────────────────────────────────────────
