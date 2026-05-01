@@ -366,6 +366,7 @@
                 <li class="nav-item" onclick="switchTab('sources')"><i class="fas fa-rss"></i> News Sources</li>
                 <li class="nav-item" onclick="switchTab('stories')"><i class="fas fa-thumbtack"></i> Top Stories</li>
                 <li class="nav-item" onclick="switchTab('banners')"><i class="fas fa-ad"></i> Banners & Ads</li>
+                <li class="nav-item" onclick="switchTab('monetization')"><i class="fas fa-dollar-sign"></i> Monetization</li>
                 <li class="nav-item" onclick="switchTab('settings')"><i class="fas fa-cog"></i> Settings</li>
             </ul>
         </aside>
@@ -542,100 +543,107 @@
                     </div>
                 </div>
             </div>
-<!-- Tab 4: Monetization -->
-<div id="tab-monetization" class="tab-content">
-    <div class="content-card">
-        <div class="card-header">
-            <h3><i class="fas fa-chart-line"></i> Monetization Roadmap</h3>
-        </div>
-        <div class="card-body">
-            <div style="margin-bottom: 25px;">
-                <h4 style="margin-bottom: 15px; color: var(--primary);">✅ Active Revenue Streams</h4>
-                <div class="stats-grid">
-                    <div class="stat-card" style="border-left-color: var(--success);">
-                        <h3><i class="fab fa-google"></i> Google AdSense</h3>
-                        <div class="number" style="font-size: 1.2rem;">Publisher ID: ca-pub-3036335622208432</div>
-                        <p style="font-size: 0.85rem; color: var(--gray); margin-top: 8px;">Status: Active | Auto-ads enabled</p>
-                    </div>
-                    <div class="stat-card" style="border-left-color: var(--warning);">
-                        <h3><i class="fas fa-ad"></i> Direct Banners</h3>
-                        <div class="number" style="font-size: 1.2rem;">1 Active</div>
-                        <p style="font-size: 0.85rem; color: var(--gray); margin-top: 8px;">Manage in Banners tab</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="margin-bottom: 25px;">
-                <h4 style="margin-bottom: 15px; color: var(--primary);">📈 Growth Stage Opportunities</h4>
-                <div style="background: var(--light); padding: 20px; border-radius: 10px;">
-                    <div style="display: grid; gap: 15px;">
-                        <div style="display: flex; gap: 12px; align-items: start;">
-                            <div style="background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</div>
-                            <div>
-                                <strong style="color: var(--dark);">Sponsored Content</strong>
-                                <p style="font-size: 0.85rem; color: var(--gray); margin-top: 4px;">Partner with brands for native advertising. Charge NPR 10,000-50,000 per sponsored article.</p>
-                                <p style="font-size: 0.8rem; color: var(--success); margin-top: 4px;">💰 Est. Income: NPR 50,000-200,000/month at 10K daily visitors</p>
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 12px; align-items: start;">
-                            <div style="background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</div>
-                            <div>
-                                <strong style="color: var(--dark);">Affiliate Marketing</strong>
-                                <p style="font-size: 0.85rem; color: var(--gray); margin-top: 4px;">Add affiliate links for products in tech/business news (Daraz, Sastodeal, Amazon).</p>
-                                <p style="font-size: 0.8rem; color: var(--success); margin-top: 4px;">💰 Est. Income: NPR 20,000-100,000/month (5-10% commission)</p>
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 12px; align-items: start;">
-                            <div style="background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</div>
-                            <div>
-                                <strong style="color: var(--dark);">Premium Newsletter</strong>
-                                <p style="font-size: 0.85rem; color: var(--gray); margin-top: 4px;">Daily/weekly premium newsletter with exclusive analysis. Charge NPR 200-500/month.</p>
-                                <p style="font-size: 0.8rem; color: var(--success); margin-top: 4px;">💰 Est. Income: NPR 100,000-500,000/month at 1000 subscribers</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 10px; border-left: 4px solid var(--warning);">
-                <h4 style="margin-bottom: 10px;"><i class="fas fa-lightbulb"></i> Quick Wins (Start This Week)</h4>
-                <ol style="font-size: 0.9rem; color: var(--dark); line-height: 1.8; margin-left: 20px;">
-                    <li>Add affiliate links to tech product reviews (Daraz Affiliate Program)</li>
-                    <li>Create "Sponsored" category for paid content</li>
-                    <li>Add donation button (Khalti, eSewa, PayPal)</li>
-                    <li>Reach out to 5 local businesses for direct banner ads (NPR 10,000/month each)</li>
-                    <li>Start WhatsApp newsletter (free → premium tier)</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-            <!-- Settings Tab -->
-             <div class="card" style="margin-top: 20px; padding: 20px; background: white; border-radius: 8px;">
-    <h3>💹 Daily Market Rates</h3>
-    <p>Update these once a day to keep your readers informed!</p>
-    <div style="display: grid; gap: 10px; margin-top: 10px;">
-        <input type="text" id="adminGold" placeholder="Gold Price (e.g., Rs. 1,45,000)">
-        <input type="text" id="adminSilver" placeholder="Silver Price (e.g., Rs. 1,750)">
-        <input type="text" id="adminForex" placeholder="USD Rate (e.g., 134.50)">
-        <input type="text" id="adminEuro" placeholder="EUR Rate (e.g., 145.20)">
-        <button onclick="updateMarket()" style="background: #10b981; color: white; border: none; padding: 10px; cursor: pointer;">Update Market Bar</button>
-    </div>
-</div>
 
-<script>
-function updateMarket() {
-    const gold = document.getElementById('adminGold').value;
-    const silver = document.getElementById('adminSilver').value;
-    const forex = document.getElementById('adminForex').value;
-    const euro = document.getElementById('adminEuro').value;
-    
-    const marketData = { gold, silver, forex, euro };
-    localStorage.setItem('marketRates', JSON.stringify(marketData));
-    alert('Market rates updated! Refresh the homepage to see.');
-}
-</script>
+            <!-- Monetization Tab -->
+            <div id="tab-monetization" class="tab-content">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Monetization Roadmap</h3>
+                    </div>
+                    <div class="card-body">
+                        <div style="margin-bottom: 25px;">
+                            <h4 style="margin-bottom: 15px; color: var(--primary);">✅ Active Revenue Streams</h4>
+                            <div class="stats-grid">
+                                <div class="stat-card" style="border-left-color: var(--success);">
+                                    <h3><i class="fab fa-google"></i> Google AdSense</h3>
+                                    <div class="number" style="font-size: 1.2rem;">Publisher ID: ca-pub-3036335622208432</div>
+                                    <p style="font-size: 0.85rem; color: var(--gray); margin-top: 8px;">Status: Active | Auto-ads enabled</p>
+                                </div>
+                                <div class="stat-card" style="border-left-color: var(--warning);">
+                                    <h3><i class="fas fa-ad"></i> Direct Banners</h3>
+                                    <div class="number" style="font-size: 1.2rem;">1 Active</div>
+                                    <p style="font-size: 0.85rem; color: var(--gray); margin-top: 8px;">Manage in Banners tab</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <h4 style="margin-bottom: 15px; color: var(--primary);">📈 Growth Stage Opportunities</h4>
+                            <div style="background: var(--light); padding: 20px; border-radius: 10px;">
+                                <div style="display: grid; gap: 15px;">
+                                    <div style="display: flex; gap: 12px; align-items: start;">
+                                        <div style="background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</div>
+                                        <div>
+                                            <strong style="color: var(--dark);">Sponsored Content</strong>
+                                            <p style="font-size: 0.85rem; color: var(--gray); margin-top: 4px;">Partner with brands for native advertising. Charge NPR 10,000-50,000 per sponsored article.</p>
+                                            <p style="font-size: 0.8rem; color: var(--success); margin-top: 4px;">💰 Est. Income: NPR 50,000-200,000/month at 10K daily visitors</p>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 12px; align-items: start;">
+                                        <div style="background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</div>
+                                        <div>
+                                            <strong style="color: var(--dark);">Affiliate Marketing</strong>
+                                            <p style="font-size: 0.85rem; color: var(--gray); margin-top: 4px;">Add affiliate links for products in tech/business news (Daraz, Sastodeal, Amazon).</p>
+                                            <p style="font-size: 0.8rem; color: var(--success); margin-top: 4px;">💰 Est. Income: NPR 20,000-100,000/month (5-10% commission)</p>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 12px; align-items: start;">
+                                        <div style="background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</div>
+                                        <div>
+                                            <strong style="color: var(--dark);">Premium Newsletter</strong>
+                                            <p style="font-size: 0.85rem; color: var(--gray); margin-top: 4px;">Daily/weekly premium newsletter with exclusive analysis. Charge NPR 200-500/month.</p>
+                                            <p style="font-size: 0.8rem; color: var(--success); margin-top: 4px;">💰 Est. Income: NPR 100,000-500,000/month at 1000 subscribers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 10px; border-left: 4px solid var(--warning);">
+                            <h4 style="margin-bottom: 10px;"><i class="fas fa-lightbulb"></i> Quick Wins (Start This Week)</h4>
+                            <ol style="font-size: 0.9rem; color: var(--dark); line-height: 1.8; margin-left: 20px;">
+                                <li>Add affiliate links to tech product reviews (Daraz Affiliate Program)</li>
+                                <li>Create "Sponsored" category for paid content</li>
+                                <li>Add donation button (Khalti, eSewa, PayPal)</li>
+                                <li>Reach out to 5 local businesses for direct banner ads (NPR 10,000/month each)</li>
+                                <li>Start WhatsApp newsletter (free → premium tier)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
             <div id="tab-settings" class="tab-content">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>💹 Daily Market Rates</h3>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 15px; color: var(--text-light);">Update these once a day to keep your readers informed!</p>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Gold Price (10gm)</label>
+                                <input type="text" id="adminGold" placeholder="e.g., Rs. 1,45,000">
+                            </div>
+                            <div class="form-group">
+                                <label>Silver Price</label>
+                                <input type="text" id="adminSilver" placeholder="e.g., Rs. 1,750">
+                            </div>
+                            <div class="form-group">
+                                <label>USD Rate (Forex)</label>
+                                <input type="text" id="adminForex" placeholder="e.g., 134.50">
+                            </div>
+                            <div class="form-group">
+                                <label>EUR Rate</label>
+                                <input type="text" id="adminEuro" placeholder="e.g., 145.20">
+                            </div>
+                        </div>
+                        <button class="btn-primary" style="width: auto;" onclick="updateMarket()">Update Market Bar</button>
+                        <p id="marketMsg" style="color: var(--success); margin-top: 10px; display: none;">Market rates updated successfully!</p>
+                    </div>
+                </div>
+
                 <div class="content-card">
                     <div class="card-header">
                         <h3><i class="fas fa-database"></i> Data Management</h3>
@@ -656,31 +664,31 @@ function updateMarket() {
         // ===== DEFAULT SOURCES (ALL 20+ FROM YOUR LIST) =====
         const DEFAULT_SOURCES = [
             // ENGLISH NEWS (8)
-    { id: 1, name: "The Himalayan Times", url: "https://thehimalayantimes.com/feed/", category: "english", active: true },
-    { id: 2, name: "Nepali Times", url: "https://www.nepalitimes.com/feed/", category: "english", active: true },
-    { id: 3, name: "Kathmandu Tribune", url: "https://kathmandutribune.com/feed/", category: "english", active: true },
-    { id: 4, name: "Telegraph Nepal", url: "https://telegraphnepal.com/feed/", category: "english", active: true },
-    { id: 5, name: "Online Khabar (EN)", url: "https://english.onlinekhabar.com/feed", category: "english", active: true },
-    { id: 6, name: "Setopati (EN)", url: "https://en.setopati.com/feed", category: "english", active: true },
-    { id: 7, name: "Rato Pati (EN)", url: "http://english.ratopati.com/rss/", category: "english", active: true },
-    { id: 8, name: "Lokaantar (EN)", url: "http://english.lokaantar.com/feed/", category: "english", active: true },
-    // NEPALI NEWS (9)
-    { id: 9, name: "Online Khabar", url: "https://onlinekhabar.com/feed", category: "nepali", active: true },
-    { id: 10, name: "Rato Pati", url: "https://ratopati.com/feed", category: "nepali", active: true },
-    { id: 11, name: "Lokaantar", url: "https://lokaantar.com/feed", category: "nepali", active: true },
-    { id: 12, name: "Rajdhani Daily", url: "https://rajdhani.com.np/feed", category: "nepali", active: true },
-    { id: 13, name: "News of Nepal", url: "https://newsofnepal.com/feed", category: "nepali", active: true },
-    { id: 14, name: "OS Nepal", url: "https://osnepal.com/feed", category: "nepali", active: true },
-    { id: 15, name: "Nagarik News", url: "https://nagariknews.nagariknetwork.com/feed", category: "nepali", active: true },
-    { id: 16, name: "Ujyaalo Online", url: "https://ujyaaloonline.com/feed", category: "nepali", active: true },
-    { id: 17, name: "Abhiyan Daily", url: "https://abhiyandaily.com/abhiyanrss", category: "nepali", active: true },
-    // BUSINESS / TECH (3)
-    { id: 18, name: "Artha Sarokar", url: "https://arthasarokar.com/feed", category: "business", active: true },
-    { id: 19, name: "TechMandu", url: "https://techmandu.com/feed", category: "business", active: true },
-    { id: 20, name: "Nepal Database", url: "https://nepaldatabase.com/rss/latest-posts", category: "business", active: true },
-    // INTERNATIONAL (1)
-    { id: 21, name: "BBC Nepali", url: "https://www.bbc.com/nepali/index.xml", category: "intl", active: true }
-];
+            { id: 1, name: "The Himalayan Times", url: "https://thehimalayantimes.com/feed/", category: "english", active: true },
+            { id: 2, name: "Nepali Times", url: "https://www.nepalitimes.com/feed/", category: "english", active: true },
+            { id: 3, name: "Kathmandu Tribune", url: "https://kathmandutribune.com/feed/", category: "english", active: true },
+            { id: 4, name: "Telegraph Nepal", url: "https://telegraphnepal.com/feed/", category: "english", active: true },
+            { id: 5, name: "Online Khabar (EN)", url: "https://english.onlinekhabar.com/feed", category: "english", active: true },
+            { id: 6, name: "Setopati (EN)", url: "https://en.setopati.com/feed", category: "english", active: true },
+            { id: 7, name: "Rato Pati (EN)", url: "http://english.ratopati.com/rss/", category: "english", active: true },
+            { id: 8, name: "Lokaantar (EN)", url: "http://english.lokaantar.com/feed/", category: "english", active: true },
+            // NEPALI NEWS (9)
+            { id: 9, name: "Online Khabar", url: "https://onlinekhabar.com/feed", category: "nepali", active: true },
+            { id: 10, name: "Rato Pati", url: "https://ratopati.com/feed", category: "nepali", active: true },
+            { id: 11, name: "Lokaantar", url: "https://lokaantar.com/feed", category: "nepali", active: true },
+            { id: 12, name: "Rajdhani Daily", url: "https://rajdhani.com.np/feed", category: "nepali", active: true },
+            { id: 13, name: "News of Nepal", url: "https://newsofnepal.com/feed", category: "nepali", active: true },
+            { id: 14, name: "OS Nepal", url: "https://osnepal.com/feed", category: "nepali", active: true },
+            { id: 15, name: "Nagarik News", url: "https://nagariknews.nagariknetwork.com/feed", category: "nepali", active: true },
+            { id: 16, name: "Ujyaalo Online", url: "https://ujyaaloonline.com/feed", category: "nepali", active: true },
+            { id: 17, name: "Abhiyan Daily", url: "https://abhiyandaily.com/abhiyanrss", category: "nepali", active: true },
+            // BUSINESS / TECH (3)
+            { id: 18, name: "Artha Sarokar", url: "https://arthasarokar.com/feed", category: "business", active: true },
+            { id: 19, name: "TechMandu", url: "https://techmandu.com/feed", category: "business", active: true },
+            { id: 20, name: "Nepal Database", url: "https://nepaldatabase.com/rss/latest-posts", category: "business", active: true },
+            // INTERNATIONAL (1)
+            { id: 21, name: "BBC Nepali", url: "https://www.bbc.com/nepali/index.xml", category: "intl", active: true }
+        ];
 
         // ===== AUTH =====
         if(localStorage.getItem('isAdmin') === 'true') showDashboard();
@@ -719,6 +727,7 @@ function updateMarket() {
                 sources: 'News Sources Management',
                 stories: 'Top Stories Management',
                 banners: 'Banners & Advertisements',
+                monetization: 'Monetization Roadmap',
                 settings: 'Settings & Data'
             };
             document.getElementById('pageTitle').innerText = titles[tabName];
@@ -736,6 +745,13 @@ function updateMarket() {
             loadStats();
             renderSourcesTable();
             renderStoriesList();
+            
+            // Load existing market rates into inputs
+            const marketData = JSON.parse(localStorage.getItem('marketRates')) || {};
+            if(marketData.gold) document.getElementById('adminGold').value = marketData.gold;
+            if(marketData.silver) document.getElementById('adminSilver').value = marketData.silver;
+            if(marketData.forex) document.getElementById('adminForex').value = marketData.forex;
+            if(marketData.euro) document.getElementById('adminEuro').value = marketData.euro;
         }
 
         function loadStats() {
@@ -933,6 +949,21 @@ function updateMarket() {
             localStorage.setItem('siteBanner', JSON.stringify({ img, link, active }));
             
             const msg = document.getElementById('bannerMsg');
+            msg.style.display = 'block';
+            setTimeout(() => msg.style.display = 'none', 3000);
+        }
+
+        // ===== MARKET RATES =====
+        function updateMarket() {
+            const gold = document.getElementById('adminGold').value;
+            const silver = document.getElementById('adminSilver').value;
+            const forex = document.getElementById('adminForex').value;
+            const euro = document.getElementById('adminEuro').value;
+            
+            const marketData = { gold, silver, forex, euro };
+            localStorage.setItem('marketRates', JSON.stringify(marketData));
+            
+            const msg = document.getElementById('marketMsg');
             msg.style.display = 'block';
             setTimeout(() => msg.style.display = 'none', 3000);
         }

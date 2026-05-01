@@ -489,55 +489,61 @@ function openShareModal(url, title) {
 
 // ── Market Rates ───────────────────────────────────────────────────────────────
 async function fetchMarketRates() {
-    const adminRates = JSON.parse(localStorage.getItem('marketRates'));
-    if (adminRates && (adminRates.gold || adminRates.silver || adminRates.forex)) {
-        if (adminRates.gold) document.getElementById('goldValue').textContent = adminRates.gold;
-        if (adminRates.silver) document.getElementById('silverValue').textContent = adminRates.silver;
-        if (adminRates.forex) document.getElementById('forexValue').textContent = 'Rs. ' + adminRates.forex;
-        if (adminRates.euro) document.getElementById('euroValue').textContent = 'Rs. ' + adminRates.euro;
-        return;
+    const adminRates = JSON.parse(localStorage.getItem('marketRates')) || {};
+    
+    // Set manual rates from admin if they exist
+    if (adminRates.gold) document.getElementById('goldValue').textContent = adminRates.gold;
+    if (adminRates.silver) document.getElementById('silverValue').textContent = adminRates.silver;
+    if (adminRates.forex) document.getElementById('forexValue').textContent = 'Rs. ' + adminRates.forex;
+    if (adminRates.euro) document.getElementById('euroValue').textContent = 'Rs. ' + adminRates.euro;
+
+    // If any rates are still "Loading...", try to fetch forex from API
+    const goldVal = document.getElementById('goldValue').textContent;
+    const silverVal = document.getElementById('silverValue').textContent;
+    const forexVal = document.getElementById('forexValue').textContent;
+    const euroVal = document.getElementById('euroValue').textContent;
+
+    if (forexVal === 'Loading...' || euroVal === 'Loading...') {
+        try {
+            const forexCache = localStorage.getItem('forexCache');
+            const cacheTime = localStorage.getItem('forexCacheTime');
+            const now = Date.now();
+
+            let forexRates = null;
+            if (forexCache && cacheTime && (now - parseInt(cacheTime)) < 30 * 60 * 1000) {
+                forexRates = JSON.parse(forexCache);
+            } else {
+                const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+                if (response.ok) {
+                    const data = await response.json();
+                    forexRates = data.rates;
+                    localStorage.setItem('forexCache', JSON.stringify(forexRates));
+                    localStorage.setItem('forexCacheTime', now.toString());
+                }
+            }
+
+            if (forexRates) {
+                if (forexVal === 'Loading...' && forexRates.NPR) {
+                    document.getElementById('forexValue').textContent = 'Rs. ' + forexRates.NPR.toFixed(2);
+                }
+                if (euroVal === 'Loading...' && forexRates.EUR && forexRates.NPR) {
+                    const euroRate = forexRates.NPR / forexRates.EUR;
+                    document.getElementById('euroValue').textContent = 'Rs. ' + euroRate.toFixed(2);
+                }
+            }
+        } catch (error) {
+            console.log('Market rates fetch error:', error);
+            if (forexVal === 'Loading...') document.getElementById('forexValue').textContent = 'N/A';
+            if (euroVal === 'Loading...') document.getElementById('euroValue').textContent = 'N/A';
+        }
     }
 
-    try {
-        const forexCache = localStorage.getItem('forexCache');
-        const cacheTime = localStorage.getItem('forexCacheTime');
-        const now = Date.now();
-
-        let forexRates = null;
-        if (forexCache && cacheTime && (now - parseInt(cacheTime)) < 30 * 60 * 1000) {
-            forexRates = JSON.parse(forexCache);
-        } else {
-            const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-            if (response.ok) {
-                const data = await response.json();
-                forexRates = data.rates;
-                localStorage.setItem('forexCache', JSON.stringify(forexRates));
-                localStorage.setItem('forexCacheTime', now.toString());
-            }
-        }
-
-        if (forexRates) {
-            if (forexRates.NPR) {
-                document.getElementById('forexValue').textContent = 'Rs. ' + forexRates.NPR.toFixed(2);
-            }
-            if (forexRates.EUR && forexRates.NPR) {
-                const euroRate = forexRates.NPR / forexRates.EUR;
-                document.getElementById('euroValue').textContent = 'Rs. ' + euroRate.toFixed(2);
-            }
-        }
-
-        const goldValue = document.getElementById('goldValue');
-        if (goldValue.textContent === 'Loading...') {
-            goldValue.textContent = 'N/A';
-        }
-        const silverValue = document.getElementById('silverValue');
-        if (silverValue.textContent === 'Loading...') {
-            silverValue.textContent = 'N/A';
-        }
-    } catch (error) {
-        console.log('Market rates fetch error:', error);
-        document.getElementById('forexValue').textContent = 'N/A';
-        document.getElementById('euroValue').textContent = 'N/A';
+    // Fallback for gold/silver if still loading
+    if (document.getElementById('goldValue').textContent === 'Loading...') {
+        document.getElementById('goldValue').textContent = 'N/A';
+    }
+    if (document.getElementById('silverValue').textContent === 'Loading...') {
+        document.getElementById('silverValue').textContent = 'N/A';
     }
 }
 
@@ -553,9 +559,6 @@ function createAdCard(slotId) {
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
     `;
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {}
     return adCard;
 }
 
